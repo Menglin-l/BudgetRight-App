@@ -1,0 +1,85 @@
+SELECT VOLUNTEER.*,concat(EMPLOYEE.First_name,' ',EMPLOYEE.Last_name) AS
+Employee from VOLUNTEER,EMPLOYEE WHERE VOLUNTEER.Emp_ID=EMPLOYEE.Emp_ID
+ORDER BY VOLUNTEER.Vol_ID
+ENDOFQUERYSTRING
+null
+null
+false
+false
+SELECT INVENTORY.*, VOLUNTEER.Vol_ID, CONCAT(VOLUNTEER.Vol_fname,' ',VOLUNTEER
+.Vol_lname) AS Volunteer FROM INVENTORY,VOLUNTEER,MANAGEMENT
+WHERE VOLUNTEER.Vol_ID = MANAGEMENT.Vol_ID
+AND MANAGEMENT.Item_id = INVENTORY.Item_id
+ENDOFQUERYSTRING
+null
+null
+false
+false
+SELECT Transaction_name AS Source, Transaction_amount AS Amount, Transaction_date AS Date
+FROM TRANSACTION WHERE Category_type = ? AND Budget_id = ? ORDER BY Date
+ENDOFQUERYSTRING
+Category_type, Budget_id
+false, false
+false
+true
+SELECT CONCAT(VOLUNTEER.Vol_fname,' ',VOLUNTEER.Vol_lname) AS Volunteer,
+VOLUNTEER.Vol_ID AS Volunteer_ID, CONCAT(EMPLOYEE.First_name,' ',EMPLOYEE
+.Last_name) AS Manager, EMPLOYEE.Emp_ID AS Manager_ID, EMPLOYEE.Emp_title AS
+Manager_Title, EMPLOYEE.Email_id AS Manager_Email FROM VOLUNTEER, EMPLOYEE
+WHERE VOLUNTEER.Emp_ID=EMPLOYEE.Emp_ID AND VOLUNTEER.Vol_fname like ?
+ENDOFQUERYSTRING
+VOLUNTEER.Vol_fname
+true
+false
+true
+SELECT EMPLOYEE.Emp_ID AS EMPLOYEE_ID,
+concat(EMPLOYEE.First_name,' ',EMPLOYEE.Last_name) AS Employee,
+EMPLOYEE.Emp_title AS Title, abs(TRANSACTION.Transaction_amount) AS Salary
+FROM EMPLOYEE, TRANSACTION, SALARY WHERE EMPLOYEE.Emp_ID=SALARY.Emp_ID
+AND SALARY.Transaction_Id=TRANSACTION.Transaction_Id
+AND TRANSACTION.Budget_id = ?
+ENDOFQUERYSTRING
+Budget_id
+null
+false
+true
+select sum(Transaction_amount)
+as balance from TRANSACTION where Transaction_date >=  ?
+and Transaction_date <=  ?
+ENDOFQUERYSTRING
+from_transaction_date, to_transaction_date
+false, false
+false
+true
+select sum(Transaction_amount) as expenditure
+from TRANSACTION where Transaction_amount < 0 and
+Transaction_date >=  ?
+and Transaction_date <=  ?
+ENDOFQUERYSTRING
+from_transaction_date, to_transaction_date
+false, false
+false
+true
+select sum(Transaction_amount) as income from TRANSACTION
+where Transaction_amount > 0
+and Transaction_date >= ?
+and Transaction_date <=  ?
+ENDOFQUERYSTRING
+from_transaction_date, to_transaction_date
+false, false
+false
+true
+INSERT INTO `mm_cpsc502101team09`.`INVENTORY`
+(`Item_id`, `Item_name`, `Item_stock`)
+VALUES (?, ?, ?);
+ENDOFQUERYSTRING
+Item_id, Item_name, Item_stock
+false, false, false
+true
+true
+select * from mm_cpsc502101team09.INVENTORY
+ENDOFQUERYSTRING
+null
+null
+false
+false
